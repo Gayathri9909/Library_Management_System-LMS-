@@ -1,0 +1,159 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout1.cshtml";
+}
+
+<div class="amain"></div>
+<div class="admin-main">
+
+
+    @model library.Models.UserModel
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Add New User</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <p class="form-group">
+                        @Html.DropDownListFor(
+                            model => model.State,
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem { Text = "Please select your State", Value = "", Disabled = true, Selected = true },
+                                new SelectListItem { Text = "Kerala", Value = "Kerala" },
+                                new SelectListItem { Text = "Tamilnadu", Value = "Tamilnadu" },
+                                new SelectListItem { Text = "Maharashtra", Value = "Maharashtra" }
+                            },
+                            new { @class = "form-control", id = "stateDropdown" }
+                        )
+                    </p>
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.District, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <p class="form-group">
+                        @Html.DropDownListFor(
+                            model => model.District,
+                            new List<SelectListItem>(), // Initially empty
+                            "Please select your District",
+                            new { @class = "form-control", id = "districtDropdown" }
+                        )
+                    </p>
+                    @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a href="@Url.Action("AdminHome", "Admin")" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    @*<div>
+            @Html.ActionLink("Back to List", "Usermanagement")
+        </div>*@
+</div>
+<script>
+    $(document).ready(function () {
+        // Define the district options for each state
+        var districts = {
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kollam"],
+            "Tamilnadu": ["Chennai", "Coimbatore", "Madurai"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"]
+        };
+
+        // Handle the change event of the state dropdown
+        $('#stateDropdown').on('change', function () {
+            var selectedState = $(this).val();
+            var districtDropdown = $('#districtDropdown');
+
+            // Clear current district options
+            districtDropdown.empty();
+            districtDropdown.append('<option value="">Please select your District</option>');
+
+            // Add new district options based on the selected state
+            if (districts[selectedState]) {
+                $.each(districts[selectedState], function (index, district) {
+                    districtDropdown.append('<option value="' + district + '">' + district + '</option>');
+                });
+            }
+        });
+    });
+</script>
+

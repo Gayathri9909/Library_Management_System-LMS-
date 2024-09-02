@@ -1,0 +1,48 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_UserLayout1.cshtml";
+}
+
+<div class="user-main"></div>
+<div class="user-section">
+    @model IEnumerable<library.Models.BookModel>
+
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

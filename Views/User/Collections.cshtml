@@ -1,0 +1,93 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout1.cshtml";
+}
+
+<div class="user-main"></div>
+@model library.Models.RequestModel
+
+<form id="checkboxForm" class="user-request-form">
+    @Html.AntiForgeryToken()
+    <div class="user-section">
+        <!-- Display Success Message -->
+        <div id="message" style="display:none;"></div>
+
+        <div class="user-request">
+            <h6 style="font-size:20px;">Select √ the list of books and submit the request</h6>
+            <button type="button" id="submitBtn" class="request-btn">Request</button>
+        </div>
+
+        <div class="book-table">
+            <div class="book-row header">
+                <div class="book-cell">Select</div>
+                <div class="book-cell">Book Title</div>
+                <div class="book-cell">Author</div>
+                <div class="book-cell">Number of Copies</div>
+                <div class="book-cell">Category</div>
+                <div class="book-cell">ISBN</div>
+                <div class="book-cell">Publish Year</div>
+            </div>
+            @for (int i = 0; i < Model.Books.Count; i++)
+            {
+                <div class="book-row">
+                    <div class="book-cell">
+                        <input type="checkbox" name="Books[@i].IsSelected" value="true" @(Model.Books[i].IsSelected ? "checked" : "") />
+                        <input type="hidden" name="Books[@i].BookId" value="@Model.Books[i].BookId" />
+                        <input type="hidden" name="Books[@i].BookTitle" value="@Model.Books[i].BookTitle" />
+                        <input type="hidden" name="Books[@i].Author" value="@Model.Books[i].Author" />
+                        <input type="hidden" name="Books[@i].NumberOfBooks" value="@Model.Books[i].NumberOfBooks" />
+                        <input type="hidden" name="Books[@i].Category" value="@Model.Books[i].Category" />
+                        <input type="hidden" name="Books[@i].ISBN" value="@Model.Books[i].ISBN" />
+                        <input type="hidden" name="Books[@i].PublishYear" value="@Model.Books[i].PublishYear" />
+                        
+
+                    </div>
+                    <div class="book-cell">@Model.Books[i].BookTitle</div>
+                    <div class="book-cell">@Model.Books[i].Author</div>
+                    <div class="book-cell">@Model.Books[i].NumberOfBooks</div>
+                    <div class="book-cell">@Model.Books[i].Category</div>
+                    <div class="book-cell">@Model.Books[i].ISBN</div>
+                    <div class="book-cell">@Model.Books[i].PublishYear</div>
+                </div>
+            }
+
+        </div>
+    </div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#submitBtn').click(function (event) {
+            event.preventDefault();  // Prevent default form submission
+
+            // Check if any checkboxes are selected
+            var isAnyCheckboxChecked = $('input[type="checkbox"]:checked').length > 0;
+
+            if (!isAnyCheckboxChecked) {
+                $('#message').text('Please select at least one book to request.').addClass('alert alert-warning').show();
+                return;
+            }
+
+            var formData = $('#checkboxForm').serialize();
+            console.log(formData);  // Check serialized data in the console
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("SubmitSelectedBooks", "User")',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        $('#message').text('Books have been successfully requested!').addClass('alert alert-success').show();
+                        // Clear selected checkboxes
+                        $('input[type="checkbox"]').prop('checked', false);
+                    } else {
+                        $('#message').text(response.message || 'An error occurred while requesting books.').addClass('alert alert-danger').show();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#message').text('An error occurred: ' + error).addClass('alert alert-danger').show();
+                }
+            });
+        });
+    });
+</script>

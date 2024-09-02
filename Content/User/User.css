@@ -1,0 +1,77 @@
+﻿body {
+}
+.user-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-image: url("aboutpic1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: brightness(50%);
+    z-index: -1;
+    height: 180px;
+}
+.user-section{
+    margin-top:50px;
+}
+.user-text{
+    font-size:45px;
+    font-family:'Brush Script MT';
+    font-weight:500
+}
+.user-list{
+    margin-bottom:30px;
+    padding:30px;
+}
+.userbtn{
+    width:300px;
+    background-color:goldenrod;
+    color:white;
+    font-size:16px;
+    border:none;
+    height:25px;
+    text-align:center;
+}
+.userbtn:hover{
+    background-color:darkgoldenrod
+}
+.user-request {
+    display: flex;
+    margin-left: 40px;
+    padding: 20px;
+}
+.request-btn{
+    margin-left:30px;
+    border:none;
+    background-color:goldenrod;
+    color:white;
+}
+.request-btn:hover{
+    background-color:darkgoldenrod
+}
+.book-table {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+}
+
+.book-row {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+    .book-row.header {
+        font-weight: bold;
+    }
+
+.book-cell {
+    flex: 1;
+    padding: 8px;
+    border-right: 1px solid #ddd;
+}
+
+    .book-cell:last-child {
+        border-right: none;
+    }

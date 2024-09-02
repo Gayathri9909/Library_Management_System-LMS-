@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_mainLayout1.cshtml";
+}
+
+<div>
+    @model library.Models.AdminLogin
+    <div class="admin-main"></div>
+
+
+    <div class="admin-section">
+        <h1 class="admin-text">Admin Login</h1>
+        @using (Html.BeginForm("Admin", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @* Display the message *@
+                @if (ViewData["Message"] != null)
+                {
+                    <div class="alert alert-info">
+                        @ViewData["Message"]
+                    </div>
+                }
+                <div class="form-group" style="display:flex">
+                    @Html.LabelFor(model => model.AdminName, htmlAttributes: new { @class = "name" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AdminName, new { htmlAttributes = new { @class = "inp1", placeholder = "Enter Admin Name" } })
+                        @Html.ValidationMessageFor(model => model.AdminName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:flex">
+                    @Html.LabelFor(model => model.AdminPassword, htmlAttributes: new { @class = "password" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AdminPassword, new { htmlAttributes = new { @class = "inp2", placeholder = "Enter Password" } })
+                        @Html.ValidationMessageFor(model => model.AdminPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button class="adminloginbtn">Login</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

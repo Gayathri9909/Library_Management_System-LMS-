@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    @*first section*@
+    <div class="main">
+        <div class="quote">
+            <div class="quote-text">
+                <h4>"A library is not a luxury but one of the necessities of life".<br /> — Henry Ward Beecher</h4>
+            </div>
+            <div class="quote-image">
+                <img src="~/Content/Home/Homepic2.jpg" alt="Library Image" style="width:200px;height:150px;">
+            </div>
+        </div>
+    </div>
+    @*secondsection*@
+    <div class="secondmain">
+        <h1 class="about">About us</h1>
+        <div>
+            <h6 class="about-text" style="text-align: justify;">
+                At<b> Libra</b>, we believe in the transformative power of knowledge. Our mission is to foster a vibrant, inclusive community by providing access to a diverse range of resources, programs, and services that inspire lifelong learning and discovery.
+                Our mission is to enrich lives by connecting people with information, ideas, and stories. We strive to be a dynamic center of learning and culture, where every member of our community can explore, learn, and grow. We are dedicated to providing resources and services that support education, literacy, and personal enrichment for all ages.
+            </h6>
+        </div>
+        <div>
+            <img src="~/Content/Home/Homepic3.jpg" class="about-image" />
+            @*<button class="read-more">Read More</button>*@
+            @Html.ActionLink("Read More", "About", "Home", new { area = "" }, new { @class = "read-more" })
+
+        </div>
+
+    </div>
+    @*thirdsection*@
+    <div class="thirdmain">
+        <div>
+            <h1 class="about" style="padding:40px;">Categories</h1>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/Home/crimestory.jpg" class="cimg" style="width:300px;height:350px;" />
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/Home/science.jpg" class="cimg" style="width:300px;height:350px;" />
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/Home/fantasy.jpg" class="cimg" style="width:300px;height:350px;" />
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/Home/autobiography.jpg" class="img" style="width:300px;height:350px;" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <button class="storybtn">Crime Story</button>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <button class="storybtn">Science Fiction</button>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <button class="storybtn">Fantasy</button>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <button class="storybtn">Autobiography</button>
+                </div>
+
+            </div>
+            <div>
+                @*<button class="category-btn">View All Categories</button>*@
+                @Html.ActionLink("View All Categories", "Booklist", "Home", new { area = "" }, new { @class = "category-btn" })
+
+            </div>
+        </div>
+        </div>
+        @*fourthsection*@
+        <div class="fourthmain" style="margin-bottom:20px;">
+            <div class="comments-container1">
+                <div class="comment-box1">
+                    <p style="text-align: justify;">"The library is a quiet haven where I can escape the hustle and bustle of everyday life. The peaceful atmosphere makes it perfect for reading and studying."</pstyle="text-align:>
+                </div>
+                <div class="comment-box2">
+                    <p style="text-align: justify;">"The library's collection is extensive and up-to-date. I can always find the latest bestsellers and a wide range of research materials."</p>
+                </div>
+            </div>
+            <div>
+                <h1 class="comment">What people say</h1>
+            </div>
+            <div class="comments-container2">
+                <div class="comment-box3">
+                    <p style="text-align: justify;"> "The website could be more user-friendly. Finding specific resources online can sometimes be a bit challenging."</p>
+                </div>
+                <div class="comment-box4">
+                    <p style="text-align: justify;">"  The noise level can sometimes be an issue in certain areas of the library. It would be great if there were more designated quiet zones."</p>
+                </div>
+                <div class="comment-box5">
+                    <p style="text-align: justify;">“I could not survive without the library. It really is extremely essential to my education. Thank you.” “I think the library is very helpful to students who choose to take advantage of it.</p>
+                </div>
+            </div>
+        </div>
+     

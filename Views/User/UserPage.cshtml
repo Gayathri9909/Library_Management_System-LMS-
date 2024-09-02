@@ -1,0 +1,50 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@*main section*@
+<div class="user-main"> </div>
+<div>
+    <div class="user-section">
+        <h2 class="user-text">Welcome to Libra </h2>
+        <div class="user-list">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/User/edituser.png" class="cimg" style="width:300px;height:350px;" />
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/User/collection.png" class="cimg" style="width:300px;height:350px;" />
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/User/request.jpg" class="cimg" style="width:300px;height:350px;" />
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <img src="~/Content/User/return.jpg" class="img" style="width:300px;height:350px;" />
+                </div>
+            </div>
+            <div class="row">
+                @*<div class="col-sm-6 col-md-4 col-lg-3">
+                        <button class="userbtn">Edit Profile</button>
+                    </div>*@
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @Html.ActionLink("Edit Profile", "EditProfile", "User", new { area = "" }, new { @class = "nav-link userbtn" })
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @*<button class="userbtn">Collection of Books</button>*@
+                    @Html.ActionLink("Collection of Books", "Collections", "User", new { area = "" }, new { @class = "nav-link userbtn" })
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @*<button class="userbtn">Request</button>*@
+                    @Html.ActionLink("Request", "RequestBookDetails", "User", new { area = "" }, new { @class = "nav-link userbtn" })
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    @*<button class="userbtn">Return details</button>*@
+                    @Html.ActionLink("Accepted Details", "ResponseDetails", "User", new { area = "" }, new { @class = "nav-link userbtn" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

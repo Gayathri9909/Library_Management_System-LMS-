@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_mainLayout1.cshtml";
+}
+<div>
+    @model library.Models.LoginModel
+    <div class="login-main"></div>
+
+
+    <div class="login-section" style="height:480px;">
+        <h1 class="login-text">Login</h1>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+    <div>
+
+        @* Display the message *@
+        @if (ViewData["Message"] != null)
+        {
+            <div class="alert alert-info">
+                @ViewData["Message"]
+            </div>
+        }
+
+        <div class="form-group" style="display:flex;">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "email" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "inp1", placeholder = "Enter your email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:flex;">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "password" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "inp2", placeholder = "Enter your password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            <h5 class="login-text2">New User? Register here</h5>
+            <h5 class="login-link">@Html.ActionLink("Register here", "Register", "Home", new { area = "" }, new { @class = "nav-link" })</h5>
+        </div>
+        <div>
+            <button class="loginbtn">Login</button>
+        </div>
+    </div>
+        }
+
+
+
+
+    </div>
+</div>

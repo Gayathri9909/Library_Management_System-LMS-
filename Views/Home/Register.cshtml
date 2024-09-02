@@ -1,0 +1,165 @@
+﻿@{
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+@{
+    ViewBag.Title = "Signup";
+}
+@model library.Models.UserModel
+
+
+
+<main>
+    <!-- Background Image -->
+    <div class="background"></div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="register-form">
+    <h1>Register</h1>
+
+    <!-- Validation Summary -->
+    <div class="form-validation">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+    @* Success and Error Messages *@
+    <div>
+        @* Display success message if available *@
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        @* Display error message if available *@
+        @if (ViewData["message"] != null)
+        {
+            <div class="alert alert-info">
+                @ViewData["message"]
+            </div>
+        }
+    </div>
+
+    @* Form Fields *@
+    <div class="form-field">
+        <label for="FirstName" class="form-label">First name:</label>
+        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="LastName" class="form-label">Last name:</label>
+        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="DateOfBirth" class="form-label">Date of birth:</label>
+        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date", max = "2007-12-31" } })
+        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="Email" class="form-label">Email:</label>
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="Password" class="form-label">Password:</label>
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="ConfirmPassword" class="form-label">Confirm password:</label>
+        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="PhoneNumber" class="form-label">Phonenumber:</label>
+        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="State" class="form-label">State:</label>
+        @Html.DropDownListFor(
+            model => model.State,
+            new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Please select your State", Value = "", Disabled = true, Selected = true },
+                new SelectListItem { Text = "Kerala", Value = "Kerala" },
+                new SelectListItem { Text = "Tamilnadu", Value = "Tamilnadu" },
+                new SelectListItem { Text = "Maharashtra", Value = "Maharashtra" }
+            },
+            new { @class = "form-control", id = "stateDropdown" }
+        )
+        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="District" class="form-label">District:</label>
+        @Html.DropDownListFor(
+            model => model.District,
+            new List<SelectListItem>(),
+            "Please select your District",
+            new { @class = "form-control", id = "districtDropdown" }
+        )
+        @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field">
+        <label for="Address" class="form-label">Address:</label>
+        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-field register">
+        <button type="submit" id="register-btn">Register</button>
+    </div>
+
+    <div class="login-link">
+        Already have an account? @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })
+    </div>
+</div>
+    }
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        var successMessage = '@TempData["SuccessMessage"]';
+        if (successMessage) {
+            alert(successMessage);
+            $('form')[0].reset();
+        }
+
+        // Handle the state and district dropdown
+        var districts = {
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kollam"],
+            "Tamilnadu": ["Chennai", "Coimbatore", "Madurai"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"]
+        };
+
+        $('#stateDropdown').on('change', function () {
+            var selectedState = $(this).val();
+            var districtDropdown = $('#districtDropdown');
+
+            districtDropdown.empty();
+            districtDropdown.append('<option value="">Please select your District</option>');
+
+            if (districts[selectedState]) {
+                $.each(districts[selectedState], function (index, district) {
+                    districtDropdown.append('<option value="' + district + '">' + district + '</option>');
+                });
+            }
+        });
+    });
+</script>
+
+

@@ -1,0 +1,134 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout1.cshtml";
+}
+
+<div class="amain"></div>
+<div class="admin-main">
+    @model IEnumerable<library.Models.UserModel>
+
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <h1 class="admin-subtext">User Management</h1>
+    <div class="container">
+        <!-- Create Button -->
+        <div class="row mb-3">
+            <div class="col">
+                @Html.ActionLink("Create", "Create", "Admin", new { area = "" }, new { @class = "btn btn-primary request-btn" })
+            </div>
+        </div>
+
+        <!-- Header Row -->
+        <div class="row header-row">
+            <div class="col">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.LastName)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Email)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Password)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.ConfirmPassword)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.State)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.District)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Address)
+            </div>
+            <div class="col"></div> <!-- Empty column for alignment -->
+        </div>
+
+        <!-- Data Rows -->
+        @foreach (var item in Model)
+        {
+            <div class="row data-row">
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Password)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.ConfirmPassword)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.State)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.District)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Address)
+                </div>
+                <div class="col">
+                    @using (Html.BeginForm("Delete", "Admin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="email" value="@item.Email" />
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?');" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <style>
+        .header-row {
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .data-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0.5rem;
+        }
+
+        /* Optional: To handle empty columns for alignment */
+        .header-row .col:last-child,
+        .data-row .col:last-child {
+            text-align: center; /* Adjust as needed */
+        }
+    </style>
+
+    @Html.ActionLink("Back to home", "Adminhome", "Admin", new { area = "" }, new { @class = "nav-link" })
+</div>
+

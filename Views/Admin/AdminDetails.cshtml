@@ -1,0 +1,74 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout1.cshtml";
+}
+<div class="amain"></div>
+<div class="admin-main">
+    @model IEnumerable<library.Models.AdminModel>
+    <h1 class="admin-subtext">Admin Details</h1>
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                @Html.ActionLink("Create", "AdminCreate", "Admin", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+        <div class="row header-row">
+            <div class="col">
+                @Html.DisplayNameFor(model => model.AdminId)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.AdminName)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.AdminPassword)
+            </div>
+            <div class="col">
+            </div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            <div class="row data-row">
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.AdminId)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.AdminName)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.AdminPassword)
+                </div>
+                <div class="col">
+                    @Html.ActionLink("Edit", "EditAdmin", "Admin", new { id = item.AdminId }, new { @class = "btn btn-secondary" }) 
+                    @using (Html.BeginForm("AdminDelete", "Admin", FormMethod.Post, new { id = item.AdminId }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@item.AdminId" />
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?');" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <style>
+        .header-row {
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+        }
+
+        .data-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 0;
+        }
+
+            .data-row .col {
+                padding: 0.5rem;
+            }
+    </style>
+
+</div>
+

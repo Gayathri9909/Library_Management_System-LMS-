@@ -1,0 +1,83 @@
+﻿body {
+    
+}
+
+.about-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-image: url("aboutpic1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: brightness(50%);
+    z-index: -1;
+    height:180px;
+}
+.about-text{
+    text-align:center;
+    font-size:55px;
+    font-family:'Brush Script MT';
+    padding:20px;
+}
+.about-section1 {
+    background-color: white;
+    height: 200px;
+    width: 700px;
+    margin-top: 50px;
+    margin-bottom:20px;
+    margin-left:30px;
+}
+.aboutimg{
+    width:200px;
+    height:200px;
+}
+.quote {
+    margin-top: 20px;
+    margin-left: 30px;
+    border-color: black;
+    width: 900px;
+    display: flex;
+    height: 300px;
+    font-family: sans-serif;
+    font-size: 18px;
+    gap:20px;
+}
+.about-section2 {
+    height: 200px;
+    width: 600px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left:480px;
+}
+.quote2 {
+    margin-top: 20px;
+    margin-left: 30px;
+    border-color: black;
+    width: 800px;
+    display: flex;
+    height: 300px;
+    font-family: sans-serif;
+    font-size: 18px;
+    gap: 10px;
+}
+.about-section3 {
+    background-color: white;
+    height: 400px;
+    width: 900px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left:30px;
+}
+.quote3 {
+    margin-top: 20px;
+    margin-left: 30px;
+    border-color: black;
+    width: 1000px;
+    display: flex;
+    height: 300px;
+    font-family: sans-serif;
+    font-size: 18px;
+    gap: 20px;
+}

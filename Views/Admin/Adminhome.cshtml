@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="amain"></div>
+<div class="admin-main">
+    <h1 class="admin-text">Admin dashboard</h1>
+</div>
+<div class="admin-list">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <img src="~/Content/Admin/admin.jpg" class="cimg" style="width:300px;height:350px;" />
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <img src="~/Content/Admin/users.jpg" class="cimg" style="width:300px;height:350px;" />
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <img src="~/Content/Admin/book.jpg" class="cimg" style="width:300px;height:350px;" />
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <img src="~/Content/Admin/request.jpg" class="cimg" style="width:300px;height:350px;" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            @*<button class="adminbtn">Add Admin</button>*@
+            @Html.ActionLink("Add Admin", "AdminDetails", "Admin", new { area = "" }, new { @class = "nav-link adminbtn" })
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            @Html.ActionLink("User Management", "Usermanagement", "Admin", new { area = "" }, new { @class = "nav-link adminbtn" })
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            @Html.ActionLink("Book Management", "Bookmanagement", "Admin", new { area = "" }, new { @class = "nav-link adminbtn" })
+            @*<button class="adminbtn">Book Management</button>*@
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            @Html.ActionLink("Manage Requests", "ManageRequests", "Admin", new { area = "" }, new { @class = "nav-link adminbtn" })
+            @*<button class="adminbtn">Manage Requests</button>*@
+        </div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <img src="~/Content/Admin/message.jpg" class="cimg" style="width:300px;height:350px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            @Html.ActionLink("Messages", "ContactMessage", "Admin", new { area = "" }, new { @class = "nav-link adminbtn" })
+        </div>
+    </div>
+</div>
+
+

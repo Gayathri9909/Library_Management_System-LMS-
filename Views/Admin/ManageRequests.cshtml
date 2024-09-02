@@ -1,0 +1,226 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout1.cshtml";
+}
+
+<div class="amain"></div>
+<div class="admin-main">
+    @model library.Models.ResponseModel
+
+    <h1 class="admin-subtext">Manage User Requests</h1>
+    <form id="checkboxForm" class="admin-response-form">
+        @Html.AntiForgeryToken()
+
+        <div>
+            <div id="message" style="display:none;"></div>
+            <button type="button" class="accept-btn" id="acceptBtn">Accept</button>
+            <button type="button" class="deny-btn" id="denyBtn">Deny</button>
+        </div>
+        <div class="book-table">
+            <div class="book-row header">
+                <div class="book-cell">Select</div>
+                <div class="book-cell">Book Title</div>
+                <div class="book-cell">Author</div>
+                <div class="book-cell">Number of Copies</div>
+                <div class="book-cell">Category</div>
+                <div class="book-cell">ISBN</div>
+                <div class="book-cell">Publish Year</div>
+                <div class="book-cell">User Email</div>
+            </div>
+
+            @for (int i = 0; i < Model.AcceptBooks.Count; i++)
+            {
+                <div class="book-row" data-book-id="@Model.AcceptBooks[i].BookId"data-status="@Model.AcceptBooks[i].Status">
+                    <div class="book-cell">
+                        <input type="checkbox" name="AcceptBooks[@i].IsSelected" value="true" @(Model.AcceptBooks[i].IsSelected ? "checked" : "") />
+                        <input type="hidden" name="AcceptBooks[@i].BookId" value="@Model.AcceptBooks[i].BookId" />
+                        <input type="hidden" name="AcceptBooks[@i].BookTitle" value="@Model.AcceptBooks[i].BookTitle" />
+                        <input type="hidden" name="AcceptBooks[@i].Author" value="@Model.AcceptBooks[i].Author" />
+                        <input type="hidden" name="AcceptBooks[@i].NumberOfBooks" value="@Model.AcceptBooks[i].NumberOfBooks" />
+                        <input type="hidden" name="AcceptBooks[@i].Category" value="@Model.AcceptBooks[i].Category" />
+                        <input type="hidden" name="AcceptBooks[@i].ISBN" value="@Model.AcceptBooks[i].ISBN" />
+                        <input type="hidden" name="AcceptBooks[@i].PublishYear" value="@Model.AcceptBooks[i].PublishYear" />
+                        <input type="hidden" name="AcceptBooks[@i].UserEmail" value="@Model.AcceptBooks[i].UserEmail" />
+                    </div>
+                    <div class="book-cell">@Model.AcceptBooks[i].BookTitle</div>
+                    <div class="book-cell">@Model.AcceptBooks[i].Author</div>
+                    <div class="book-cell">@Model.AcceptBooks[i].NumberOfBooks</div>
+                    <div class="book-cell">@Model.AcceptBooks[i].Category</div>
+                    <div class="book-cell">@Model.AcceptBooks[i].ISBN</div>
+                    <div class="book-cell">@Model.AcceptBooks[i].PublishYear</div>
+                    <div class="book-cell">@Model.AcceptBooks[i].UserEmail</div>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    function showMessage(message, type) {
+        $('#message')
+            .removeClass('alert-warning alert-success alert-danger') // Clear previous classes
+            .addClass('alert ' + type) // Add new class
+            .text(message) // Set the message text
+            .show(); // Show the message
+    }
+
+    function updateBookRowStatus(updatedBooks) {
+        // Reset colors for all rows
+        $('.book-row').removeClass('accepted denied');
+
+        // Apply colors based on updated status
+        updatedBooks.forEach(function(book) {
+            var statusClass = book.status === "Accepted" ? "accepted" : "denied";
+            $('.book-row[data-book-id="' + book.BookId + '"]').addClass(statusClass);
+        });
+    }
+
+    $('#acceptBtn').click(function() {
+       
+
+        if (!confirm('Are you sure you want to accept the selected requests?')) {
+            return;
+        }
+
+        var isAnyCheckboxChecked = $('input[type="checkbox"]:checked').length > 0;
+
+        if (!isAnyCheckboxChecked) {
+            showMessage('Please select at least one book to accept a request.', 'alert-warning');
+            return;
+        }
+
+        var formData = $('#checkboxForm').serialize() + '&IsAcceptRequest=true';
+        console.log(formData); // Debug to check if UserEmail is included
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SubmitResponseBooks", "Admin")',
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    showMessage('Accepted book request is successfully sent!', 'alert-success');
+                    updateBookRowStatus(response.updatedBooks);
+                } else {
+                    showMessage(response.message || 'An error occurred while responding to book request.', 'alert-danger');
+                }
+                $('input[type="checkbox"]').prop('checked', false);
+                location.reload(); // Reload the page to refresh the list
+            },
+            error: function(xhr, status, error) {
+                showMessage('An error occurred: ' + error, 'alert-danger');
+            }
+        });
+    });
+
+    $('#denyBtn').click(function() {
+        
+
+        if (!confirm('Are you sure you want to deny the selected requests?')) {
+            return;
+        }
+
+        var isAnyCheckboxChecked = $('input[type="checkbox"]:checked').length > 0;
+
+        if (!isAnyCheckboxChecked) {
+            showMessage('Please select at least one book to deny a request.', 'alert-warning');
+            return;
+        }
+
+        var formData = $('#checkboxForm').serialize() + '&IsAcceptRequest=false';
+        $('#message').text('Denying selected requests successfully implemented.').addClass('alert alert-info').show();
+        $('input[type="checkbox"]').prop('checked', false);
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SubmitResponseBooks", "Admin")',
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    showMessage('Denied book request is successfully sent!', 'alert-success');
+                    updateBookRowStatus(response.updatedBooks);
+                } else {
+                    showMessage(response.message || 'An error occurred while responding to book request.', 'alert-danger');
+                }
+            },
+            error: function(xhr, status, error) {
+                showMessage('An error occurred: ' + error, 'alert-danger');
+            }
+        });
+    });
+});
+
+
+
+
+</script>
+
+<style>
+    .book-row {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        align-items: center;
+    }
+
+        .book-row.header {
+            font-weight: bold;
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+    .accept-btn, .deny-btn {
+        background-color: goldenrod;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 5px;
+    }
+
+        .accept-btn:hover, .deny-btn:hover {
+            background-color: darkgoldenrod;
+        }
+
+    .deny-btn {
+        background-color: darkred;
+    }
+
+        .deny-btn:hover {
+            background-color: red;
+        }
+
+    .alert {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    .book-row[data-status="Accepted"] {
+        color: green;
+    }
+
+    .book-row[data-status="Denied"] {
+        color: red;
+    }
+    .book-row.new {
+        color: blue; /* Color for newly inserted books */
+    }
+</style>

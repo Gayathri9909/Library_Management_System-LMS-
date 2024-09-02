@@ -1,0 +1,97 @@
+﻿body {
+}
+.contact-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-image: url("aboutpic1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: brightness(50%);
+    z-index: -1;
+    height: 180px;
+}
+.contact-text {
+    text-align: center;
+    font-size: 55px;
+    font-family: 'Brush Script MT';
+    padding: 20px;
+}
+.contact-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin-right:200px;
+    margin-left:30px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    margin-bottom: 20px;
+}
+
+    /* Style for each form element */
+    .form-row input,
+    .form-row textarea {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 5px; /* Space between input and error message */
+        width:100%;
+    }
+
+/* Style for error messages */
+.text-danger {
+    color: red;
+    font-size: 2px;
+    margin-top: 0.25em;
+   
+}
+
+/* To place the error message on the right side */
+/*.form-row {
+    display: flex;
+    align-items: center;*/ /* Align items vertically in the center */
+/*}
+
+    .form-row input,
+    .form-row textarea {
+        flex: 1;*/ /* Take up available space */
+        /*margin-right: 10px;*/ /* Space between input and error message */
+    /*}
+
+.text-danger {
+    flex-shrink: 0;*/ /* Prevent the error message from shrinking */
+/*}*/
+
+.contact-button {
+    background-color: goldenrod;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left:140px;
+}
+
+    .contact-button:hover {
+        background-color: darkgoldenrod;
+    }
+
+    .contact-section2{
+        margin-left:90px;
+        padding:70px;
+        margin-top:70px;
+    }
+.text-danger {
+    color: red;
+    font-size: 0.875em; /* Adjust size as needed */
+    margin-top: 0.25em; /* Space between field and error message */
+}

@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div>
+    <div class="contact-main"> </div>
+    <h1 class="contact-text">Contact us</h1>
+    @model library.Models.ContactModel
+
+    @* Display the message *@
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["Message"]
+        </div>
+    }
+    <div style="display:flex;margin-left:65px">
+        <div style="width:700px;height:500px">
+            <h3 style="padding:18px">GET IN TOUCH WITH US</h3>
+            @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { id = "contactForm", @class = "contact-form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-row">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Your Name" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-row">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Your Email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-row">
+                    @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", placeholder = "Subject" })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-row">
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control", rows = 5, placeholder = "Message" })
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="contact-button">Send Message</button>
+            }
+        </div>
+        <div class="contact-section2">
+            <div style="display:flex;gap:15px">
+                <img src="~/Content/Contact/location.jpg" style="width:35px;height:30px;" />
+                <h6>Our Address:</h6>
+                <p>Libra Library, 305 University Building, Kochi, Ernakulam</p>
+            </div>
+            <div style="display:flex;gap:15px">
+                <img src="~/Content/Contact/email.jpg" style="width:35px;height:30px;" />
+                <h6>Email address:</h6>
+                <p>libralibrary@gmail.com</p>
+            </div>
+            <div style="display:flex;gap:15px">
+                <img src="~/Content/Contact/phone.jpg" style="width:35px;height:30px;" />
+                <h6>Phone number:</h6>
+                <p>+91 9999999999</p>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#contactForm").validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 2
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Subject: {
+                    required: true,
+                    minlength: 5
+                },
+                Message: {
+                    required: true,
+                    minlength: 10
+                }
+            },
+            messages: {
+                Name: {
+                    required: "Please enter your name",
+                    minlength: "Your name must be at least 2 characters long"
+                },
+                Email: {
+                    required: "Please enter your email address",
+                    email: "Please enter a valid email address"
+                },
+                Subject: {
+                    required: "Please enter a subject",
+                    minlength: "Subject must be at least 5 characters long"
+                },
+                Message: {
+                    required: "Please enter your message",
+                    minlength: "Message must be at least 10 characters long"
+                }
+            },
+            errorClass: "text-danger",
+            validClass: "text-success",
+
+        });
+    });
+</script>

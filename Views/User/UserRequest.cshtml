@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_UserLayout1.cshtml";
+}
+@model IEnumerable<library.Models.BookModel>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfBooks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+       
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBooks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+         
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*//single book visibility
+    @model library.Models.BookModel
+
+    <div>
+        <h2>@Model.BookTitle</h2>
+        <p>Author: @Model.Author</p>
+        <p>Category: @Model.Category</p>
+        <p>Number of Books: @Model.NumberOfBooks</p>
+    </div>*@

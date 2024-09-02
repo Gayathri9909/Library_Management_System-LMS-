@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Library Management System<</title>
+    @Styles.Render("~/Content/css")
+
+    <link href="~/Content/About/About.css" rel="stylesheet" />
+    <link href="~/Content/Contact/contact.css" rel="stylesheet" />
+    <link href="~/Content/Signin/Signup.css" rel="stylesheet" />
+    <link href="~/Content/Book/Book.css" rel="stylesheet" />
+    <link href="~/Content/Home/Nav.css" rel="stylesheet" />
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery Validation plugin -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/additional-methods.min.js"></script>
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-custom">
+        <div class="container">
+            <h2 class="icon">Libra</h2>
+            @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li style="margin-left:780px">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Books", "Booklist", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Main Content -->
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <!-- End Main Content -->
+    <!-- Footer -->
+    @*footer*@
+    <footer>
+        <div style="display:flex">
+            <div class="footer-section1">
+                <h2 class="ficon">Libra</h2>
+                <p>The library is a quiet haven where we can escape the hustle and bustle of everyday life.</p>
+                <div style="margin-left:30px">
+                    <img src="~/Content/Home/fb.png" style="width:30px;height:30px;margin-right:15px;" />
+                    <img src="~/Content/Home/insta.jpg" style="width: 30px; height: 30px; margin-right: 15px;" />
+                    <img src="~/Content/Home/link.png" style="width:30px;height:30px" />
+                </div>
+            </div>
+            <div class="footer-section2">
+                <h3 style="margin-bottom:10px;">Contact Us</h3>
+                <h6>305,University building,Kochi,Ernakulam</h6>
+                <h6>Email:<i>libralibrary@gmail.com</i></h6>
+                <h6>Phone:<i>+91 9999999999</i></h6>
+                <h6>Website:<i>www.libralibrary@gmail.com</i></h6>
+            </div>
+        </div>
+        <p style="text-align:center;font-weight:700">&copy; @DateTime.Now.Year - All right reserved</p>
+    </footer>
+    <!-- End Footer -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+
+

@@ -1,0 +1,100 @@
+﻿<head>
+    <!-- Other head content -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Other scripts and stylesheets -->
+</head>
+
+
+@{
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<div>
+    <div class="book-main"></div>
+
+    @model IEnumerable<library.Models.BookModel>
+
+    <div class="book-section">
+        <h1 class="book-text">Collection of Books</h1>
+        <div class="book-list">
+            <div class="container">
+
+                @using (Html.BeginForm("Booklist", "Home", FormMethod.Get))
+                {
+                    <div class="search-container">
+                        <b>Search by:</b>
+                        @Html.RadioButton("searchBy", "Title", true) <text>Title</text>
+                        @Html.RadioButton("searchBy", "Category") <text>Category</text>
+                        <div style="display:flex;margin-bottom:10px">
+                        @Html.TextBox("search", "", new { @class = "form-control", placeholder = "Enter search term..." })
+
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row custom-header">
+                <div class="col-sm-1">Book ID</div>
+                <div class="col-sm-2">Book Title</div>
+                <div class="col-sm-2">Author</div>
+                <div class="col-sm-1">Number of Copies</div>
+                <div class="col-sm-2">Category</div>
+                <div class="col-sm-2">ISBN</div>
+                <div class="col-sm-1">Publish Year</div>
+
+            </div>
+
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <div class="row mb-2 booklist">
+                        <div class="col-sm-1">
+                            @Html.DisplayFor(modelItem => item.BookId)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(modelItem => item.BookTitle)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </div>
+                        <div class="col-sm-1">
+                            @Html.DisplayFor(modelItem => item.NumberOfBooks)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(modelItem => item.ISBN)
+                        </div>
+                        <div class="col-sm-1">
+                            @Html.DisplayFor(modelItem => item.PublishYear)
+                        </div>
+
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No books available.</p>
+            }
+        </div>
+    </div>
+
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('.booklist').hover(
+            function () {
+                $(this).find('div').css('color', 'blue');
+            },
+            function () {
+                $(this).find('div').css('color', '');
+            }
+        );
+    });
+</script>
+
+

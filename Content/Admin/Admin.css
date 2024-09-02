@@ -1,0 +1,72 @@
+﻿body {
+}
+
+
+.admin-main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-image: url("aboutpic1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    filter: brightness(50%);
+    z-index: -1;
+    height: 180px;
+}
+
+.admin-text {
+    text-align: center;
+    font-family: 'Brush Script MT';
+    padding: 50px;
+    font-size: 50px;
+}
+
+.admin-section {
+    height: 400px;
+}
+
+.name {
+    margin-left: 425px;
+    font-size: 16px;
+  
+}
+
+.password {
+    margin-left: 420px;
+    font-size: 16px;
+}
+
+.inp1 {
+    margin-left: 46px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    width: 350px;
+}
+
+.inp2 {
+    margin-left: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 4px;
+    width: 350px;
+}
+
+
+
+.adminloginbtn {
+    margin-left: 600px;
+    background-color: goldenrod;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 10px;
+    width: 150px;
+    margin-bottom: 60px;
+}
+
+    .adminloginbtn:hover {
+        background-color: darkgoldenrod;
+    }

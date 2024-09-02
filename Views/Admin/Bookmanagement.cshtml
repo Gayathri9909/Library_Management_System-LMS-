@@ -1,0 +1,105 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout1.cshtml";
+}
+
+<div class="amain"></div>
+<div class="admin-main">
+
+    @model IEnumerable<library.Models.BookModel>
+
+    @*<p>
+            @Html.ActionLink("Create New", "BookCreate","Admin")
+        </p>*@
+    <h1 class="admin-subtext">Book Management</h1>
+    <div class="container">
+        <!-- Create Button -->
+        <div class="row mb-3">
+            <div class="col">
+                @Html.ActionLink("Create", "BookCreate", "Admin", new { area = "" }, new { @class = "btn btn-primary request-btn" })
+            </div>
+        </div>
+
+        <!-- Header Row -->
+        <div class="row header-row">
+            <div class="col">
+                @Html.DisplayNameFor(model => model.BookId)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Author)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.NumberOfBooks)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Category)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.ISBN)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.PublishYear)
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <!-- Data Rows -->
+        @foreach (var item in Model)
+        {
+            <div class="row data-row">
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Author)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.NumberOfBooks)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Category)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.PublishYear)
+                </div>
+                <div class="col">
+                    @Html.ActionLink("Edit", "BookEdit", "Admin", new { id = item.BookId }, new { @class = "btn btn-primary request-btn" }) |
+                    @using (Html.BeginForm("BookDelete", "Admin", FormMethod.Post, new { id = item.BookId }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@item.BookId" />
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?');" />
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <style>
+        .header-row {
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+        }
+
+        .data-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 0;
+        }
+
+            .data-row .col {
+                padding: 0.5rem;
+            }
+    </style>
+
+</div>
+

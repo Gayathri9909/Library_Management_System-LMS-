@@ -1,0 +1,80 @@
+﻿
+
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout1.cshtml";
+}
+<div class="amain"></div>
+<div class="admin-main">
+    <h1 class="admin-subtext"> Message details</h1>
+
+    @model IEnumerable<library.Models.ContactModel>
+
+
+    <div class="container">
+        <!-- Header Row -->
+        <div class="row header-row">
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Email)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Subject)
+            </div>
+            <div class="col">
+                @Html.DisplayNameFor(model => model.Message)
+            </div>
+            <div class="col"></div> <!-- Empty column for alignment -->
+        </div>
+
+        <!-- Data Rows -->
+        @foreach (var item in Model)
+        {
+            <div class="row data-row">
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </div>
+                <div class="col">
+                    @Html.DisplayFor(modelItem => item.Message)
+                </div>
+                <div class="col"></div> <!-- Empty column for alignment -->
+            </div>
+        }
+    </div>
+
+    <style>
+        .header-row {
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 0.5rem;
+            display: flex;
+        }
+
+        .data-row {
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 0;
+            display: flex;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0.5rem;
+        }
+
+        /* Optional: To handle empty columns for alignment */
+        .header-row .col:last-child,
+        .data-row .col:last-child {
+            text-align: center; /* Adjust as needed */
+        }
+    </style>
+
+</div>
+
